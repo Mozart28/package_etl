@@ -1,0 +1,4 @@
+charset-norallizer
+pandas
+scikit-learn
+numpy
