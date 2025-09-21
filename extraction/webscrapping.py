@@ -12,36 +12,53 @@ class ExtractionData:
 
     @staticmethod
     def _nettoyer_colonnes(df: pd.DataFrame) -> pd.DataFrame:
-        """Nettoie les noms de colonnes : supprime \n, espaces multiples et trim."""
+        """
+        Nettoie les noms de colonnes : supprime \n, espaces multiples et trim.
+        """
         new_cols = []
         for col in df.columns:
-            col = col.replace("\n", " ")          # remplacer les sauts de ligne
-            col = re.sub(r"\s+", " ", col)       # réduire les espaces multiples
-            col = col.strip()                     # supprimer espaces début/fin
+            col = col.replace("\n", " ")          
+            col = re.sub(r"\s+", " ", col)       
+            col = col.strip()                     
             new_cols.append(col)
         df.columns = new_cols
         return df
 
     @staticmethod
     def extract_webscrapping(url: str, columns_to_extract: list = None, rename_columns: list = None) -> pd.DataFrame:
+        """
+        Extrait des données d'un site web et retourne un DataFrame pandas.
+        ----------
+        Paramètres :
+        url : str
+        L'URL du site sur lequel l'extraction va être faite.
+        columns_to_extract : list (optionnel)
+        Liste des classes HTML à extraire.
+        Si None → toutes les colonnes disponibles seront extraites.
+        rename_columns : list (optionnel)
+        Liste des nouveaux noms de colonnes pour le DataFrame.
+        Doit avoir la même taille que columns_to_extract.
+
+        Retour :
+        pandas.DataFrame
+        """
         try:
             pageweb = requests.get(url, timeout=10)
             pageweb.raise_for_status()
             soup = BeautifulSoup(pageweb.content, "html.parser")
 
-            # ✅ Mode tableau HTML
+           
             if columns_to_extract is None:
                 tables = soup.find_all("table")
                 if not tables or len(tables) < 2:
                     raise ValueError("Impossible de trouver le tableau de données.")
 
-                table = tables[1]  # prendre le 2ème tableau
-
+                table = tables[1]  
                 all_rows = table.find_all("tr")
-                # Première ligne = en-têtes
+               
                 headers = [td.get_text(" ", strip=True) for td in all_rows[0].find_all("td")]
 
-                # Lignes suivantes = données
+            
                 rows = []
                 for tr in all_rows[1:]:
                     cells = [td.get_text(" ",strip=True) for td in tr.find_all("td")]
@@ -49,10 +66,10 @@ class ExtractionData:
                         rows.append(cells)
 
                 df = pd.DataFrame(rows, columns=headers)
-                #df = ExtractionData._nettoyer_colonnes(df)  # nettoyage automatique
+              
                 return df
 
-            # ✅ Mode extraction par classes CSS
+          
             data = {}
             for col in columns_to_extract:
                 tags = soup.find_all(attrs={"class": col})
@@ -63,7 +80,7 @@ class ExtractionData:
             if rename_columns and len(rename_columns) == len(df.columns):
                 df.columns = rename_columns
 
-            #df = ExtractionData._nettoyer_colonnes(df)  # nettoyage automatique
+            
             return df
 
         except Exception as e:
