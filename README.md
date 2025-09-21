@@ -27,7 +27,9 @@ pip install /chemin/vers/le/dossier/etl_package
 # Fonctionnalités
 Le package fournit plusieurs modules :
 Extraction
+
 ExtractionData : extraction de données depuis web ou fichiers.
+
 Exploration / QA
 ValeurDouble, ValeurManquante : détection des doublons et valeurs manquantes.
 Imputation
