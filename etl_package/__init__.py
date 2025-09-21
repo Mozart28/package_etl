@@ -13,15 +13,17 @@ from .encodage.methode_encodage import EncodeurCategoriel
 from .nettoyage.gestion_outliers import GestionOutliers
 
 
-__all__ = ["ExtractionData",
-           "ValeurDouble",
-           "ValeurManquante",
+__all__ = [
+    "ExtractionData",
+    "ValeurDouble",
+    "ValeurManquante",
     "Imputateur",
-     "ImputateurML",
+    "ImputateurML",
     "NormaliserColonne",
     "RemplacementColonne",
     "FeatureEngineering",
+    "Loader",
+    "ZScoreAnomalie",
+    "GestionOutliers",
     "EncodeurCategoriel",
-    "GestionOutliers"
-    "Loader"
 ]
