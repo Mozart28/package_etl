@@ -14,7 +14,7 @@ class ImputateurML:
         df: pd.DataFrame,
         colonne_cible: str,
         modele: BaseEstimator
-    ) -> pd.Series:
+    ) -> pd.DataFrame:
         """
         Impute les valeurs manquantes d'une colonne avec un modèle ML.
         Affiche toujours un message sur l'état de l'imputation.
@@ -30,13 +30,13 @@ class ImputateurML:
 
         Retour
         ------
-        pd.Series
+        pd.DataFrame
             Colonne imputée.
         """
 
 
         if not isinstance(df, pd.DataFrame):
-            raise TypeError("`df` doit être un pandas.DataFrame.")
+            raise TypeError("`df` doit être un DataFrame pandas.")
         
 
         if colonne_cible not in df.columns:

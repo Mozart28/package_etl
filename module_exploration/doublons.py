@@ -20,8 +20,9 @@ class ValeurDouble:
          return_rows : bool, optionnel 
          Si True, retourne les lignes dupliquées au lieu du nombre. 
          keep : str, optionnel Paramètre pour df.duplicated() : 
-         'first', 'last' ou False Retour :
-         -------- int ou pd.DataFrame 
+         'first', 'last' ou False 
+         Retour :
+         -------- nombre de doublons ou pd.DataFrame 
          - Si return_rows=False : nombre de doublons ou 0 si aucun. 
          - Si return_rows=True : DataFrame contenant uniquement les lignes en double (vide si aucune valeur dupliquée).
         
@@ -45,7 +46,7 @@ class ValeurDouble:
                 if return_rows:
                     print("Pas de lignes à retourner, aucune valeur dupliquée.")
                 else:
-                    print("Il n'y a pas de valeurs doublons dans la DataFrame.")
+                    print("Il n'y a pas de valeur double dans la DataFrame.")
                 return
             else:
                 if return_rows:

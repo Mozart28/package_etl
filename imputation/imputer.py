@@ -21,7 +21,7 @@ class Imputateur:
         *,
         fallback: Any | None = None,
         verbose: bool = False,
-    ) -> pd.Series:
+    ) -> pd.DataFrame:
         """
         Impute les valeurs manquantes d'une colonne uniquement si elle contient des NaN.
 
@@ -40,7 +40,7 @@ class Imputateur:
 
         Retour
         ------
-        pd.Series
+        pd.DataFrame
             Colonne imputée si NaN existants, sinon renvoie la colonne originale avec un message.
         """
         if not isinstance(df, pd.DataFrame):
@@ -84,8 +84,9 @@ class Imputateur:
         if pd.isna(val) and fallback is not None:
             out_col = out_col.fillna(fallback)
             val = fallback
+            out_col_df = out_col.to_frame()
 
         if verbose:
             print(f" Imputation appliquée sur '{colonne}' avec la valeur : {val}")
 
-        return out_col
+        return out_col_df

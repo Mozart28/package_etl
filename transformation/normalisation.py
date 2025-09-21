@@ -8,7 +8,7 @@ class NormaliserColonne:
 
     @staticmethod
     
-    def normaliser_colonne_choisie(df: pd.DataFrame, col: str, as_new: str | None = None) -> pd.DataFrame:
+    def normaliser_colonne_choisie(df: pd.DataFrame, col: str, as_new: str | None = None,inplace: bool=False) -> pd.DataFrame:
         """
         Normalise une colonne d'un DataFrame entre 0 et 1.
         
@@ -21,6 +21,8 @@ class NormaliserColonne:
         as_new : str | None, default=None
             - Si None : la colonne est remplacée
             - Si str  : la colonne normalisée est stockée sous ce nom
+        inplace : bool, default=False
+            Si True, modifie directement df. Sinon, retourne une copie.
         
         Returns
         -------
@@ -32,7 +34,7 @@ class NormaliserColonne:
             raise TypeError("df doit être un DataFrame pandas")
         
         if df.empty:
-            print("⚠️ Le DataFrame est vide.")
+            print("Le DataFrame est vide.")
             return df
         
         if col not in df.columns:
@@ -41,7 +43,11 @@ class NormaliserColonne:
         if not pd.api.types.is_numeric_dtype(df[col]):
             raise TypeError(f"La colonne '{col}' doit être numérique pour être normalisée.")
         
-        df = df.copy()
+        if inplace :
+            df = df
+        else:
+            df = df.copy()
+       
         
         col_min, col_max = df[col].min(), df[col].max()
         
@@ -53,7 +59,7 @@ class NormaliserColonne:
             normalized = (df[col] - col_min) / (col_max - col_min)
             if as_new is None:
                 df[col] = normalized
-                print(f"La colonne '{col}' a été normalisée entre 0 et 1 (remplacement).")
+                print(f"La colonne '{col}' a été normalisée entre 0 et 1 .")
             else:
                 if as_new in df.columns:
                     print(f"Attention : la colonne '{as_new}' existe déjà, elle sera écrasée.")

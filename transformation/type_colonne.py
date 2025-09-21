@@ -32,14 +32,14 @@ class TypeColonne:
             raise ValueError("df doit être un DataFrame pandas")
         
         if df.empty:
-            print("⚠️ Le DataFrame est vide.")
+            print("Le DataFrame est vide.")
             return df
         
       
         if isinstance(cols, str):
             cols = [cols]
         elif not isinstance(cols, list):
-            raise ValueError("cols doit être une chaîne (colonne unique) ou une liste de colonnes")
+            raise ValueError("cols doit être une chaîne de caractères ou une liste de colonnes")
        
         missing_cols = [c for c in cols if c not in df.columns]
         if missing_cols:

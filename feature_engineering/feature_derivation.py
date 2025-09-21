@@ -49,6 +49,7 @@ class FeatureEngineering:
         pd.DataFrame
             DataFrame avec la feature créée.
         """
+
         if col1 not in df.columns:
             raise ValueError(f"La colonne '{col1}' est absente du DataFrame.")
         if col2 and col2 not in df.columns:
@@ -58,7 +59,7 @@ class FeatureEngineering:
 
         if methode == "ratio":
             if not col2:
-                raise ValueError("La méthode 'ratio' nécessite col2.")
+                raise ValueError("La méthode 'ratio' nécessite de spécifier une deuxième colonne :col2.")
             col_name = new_col or f"{col1}_over_{col2}"
             df_out[col_name] = df_out[col1] / df_out[col2].replace(0, np.nan)
 

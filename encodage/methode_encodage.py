@@ -6,11 +6,13 @@ class EncodeurCategoriel:
     """
     Classe permettant d'encoder une colonne catégorielle
     avec différentes stratégies : one-hot, ordinal ou fréquence.
+    
     """
 
     Strategy = Literal["onehot", "ordinal", "frequence"]
 
     @staticmethod
+
     def encoder_colonne(
         df: pd.DataFrame,
         colonne: str,

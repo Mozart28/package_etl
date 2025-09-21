@@ -1,0 +1,36 @@
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "etl-package"
+version = "0.1.0"
+description = "Un package ETL modulaire pour pipeline ETL sur des données ."
+authors = [
+    { name="Ton Nom", email="ton.email@example.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+
+dependencies = [
+    "pandas>=1.3",
+    "numpy>=1.21",
+    "sqlalchemy>=1.4",
+    "pymongo>=4.0",
+    "openpyxl>=3.0"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools]
+packages = ["etl_package"]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]

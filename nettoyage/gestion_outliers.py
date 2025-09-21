@@ -9,7 +9,7 @@ class GestionOutliers:
     Strategy = Literal["remove", "winsorize", "median", "mean", "log", "flag"]
 
     @staticmethod
-    
+
     def gerer_outliers(
         df: pd.DataFrame,
         colonne: str,
@@ -18,6 +18,7 @@ class GestionOutliers:
         inplace: bool = False,
         seuil: float = 1.5,
     ) -> pd.DataFrame:
+        
         if not isinstance(df, pd.DataFrame):
             raise TypeError("`df` doit être un pandas.DataFrame.")
         if colonne not in df.columns:

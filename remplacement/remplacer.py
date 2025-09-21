@@ -5,6 +5,7 @@ class RemplacementColonne:
     """
     Classe permettant de remplacer des valeurs ou sous-chaînes
     dans une colonne d'un DataFrame, avec option de division par 100.
+    
     """
 
     @staticmethod

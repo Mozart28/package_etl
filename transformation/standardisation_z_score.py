@@ -11,6 +11,7 @@ class Standardisation:
     """
 
     @staticmethod
+    
     def zscore(
         df: pd.DataFrame,
         colonnes: Union[str, List[str]],
