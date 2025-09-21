@@ -26,34 +26,62 @@ pip install /chemin/vers/le/dossier/etl_package
 
 # Fonctionnalités
 Le package fournit plusieurs modules :
+
 Extraction
 
-ExtractionData : extraction de données depuis web ou fichiers.
+ExtractionData : extraction de données depuis web .
 
 Exploration / QA
+
 ValeurDouble, ValeurManquante : détection des doublons et valeurs manquantes.
+
 Imputation
+
 Imputateur, ImputateurML : imputation simple ou supervisée.
+
 Normalisation
+
 NormaliserColonne : normalisation Min-Max.
+
 Remplacement
+
 RemplacementColonne : remplacement de valeurs ou sous-chaînes.
+
 Feature Engineering
+
 FeatureEngineering : création de colonnes dérivées (ratios, différences, moyennes glissantes…)
+
 Gestion des anomalies
+
 ZScoreAnomalie, GestionOutliers : détection et traitement des valeurs aberrantes.
+
 Encodage
+
 EncodeurCategoriel : encodage des variables catégorielles.
+
 Chargement
+
 Loader : chargement dans base de données ou fichiers.
 
 # Exemple d'utilisation
 
 
 import pandas as pd
-from etl_package import Imputateur, NormaliserColonne, GestionOutliers
+from etl_package import ExtractionData,Imputateur, NormaliserColonne, GestionOutliers
 
-df = pd.read_csv("data.csv")
+from etl_package import ExtractionData 
+
+url = "https://content.codecademy.com/courses/beautifulsoup/cacao/index.html"
+
+colonnes = ["Company", "Origin", "Rating", "CocoaPercent"]
+noms_final = ["Company", "Origine spécifique du haricot", "Rating", "CocoaPercentage"]
+
+df = ExtractionData.extract_webscrapping(
+    url, 
+    columns_to_extract=colonnes, 
+    rename_columns=noms_final
+)
+
 
 ## Imputation des valeurs manquantes
 df['age'] = Imputateur.imputer_colonne(df, 'age', strategie="moyenne")
